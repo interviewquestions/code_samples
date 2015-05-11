@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="http://bootswatch.com/yeti/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+            .red { 
+                color:red;
+            }
+            .blue {
+                color:blue;
+            }
+        </style>
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Red Vowels / Blue Consonants</a>
+        </div>
+        <div class="navbar-right navbar-collapse collapse">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <label for="size" class="control-label">Font Size</label>
+            </div>
+            <select id="size" class="form-control">
+                  <option></option>
+                  <option>12px</option>
+                  <option>18px</option>
+                  <option>23px</option>
+                  <option>34px</option>
+                  <option>72px</option>
+                </select>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Enter Text Below</h2>
+          <p>
+            <textarea id="target" class="form-control" rows="5"></textarea>
+          </p>
+          <p>
+            <a onclick="myFunction()" class="btn btn-default" href="#" role="button">Add Color!</a>
+            <a onclick="clearTextBox()" class="btn btn-default pull-right" href="#" role="button">Clear Text</a>
+          </p>
+
+        </div>
+      </div>
+
+    <div class="jumbotron">
+      <div class="container">
+        <p>
+          <div id="mydiv">
+              <p>
+              This site was made to help teachers at Montessori Schools save time by not having to manually change the colors of vowels and consonants.  
+              </p>
+              <p>
+              Enter your text in the textbox, click the 'Add Color!' button and--voilà!, your vowels will be converted to <span class="red">red</span> and your consonants will be <span class="blue">blue</span>.  I hope you find this tool useful!
+            </p>
+          </div>
+        </p>
+      </div>
+    </div>
+
+      <hr>
+
+      <footer>
+        <p>Website created by <a href="http://linkedin.com/in/afsheenkhosravian">Afsheen Khosravian</a> - 2014
+        </p>
+      </footer>
+    </div> <!-- /container -->        
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+
+        <script src="js/main.js"></script>
+        <script>
+            var div = $('#mydiv')[0];
+
+            function myFunction()
+            {
+              vowels = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+              var content = document.getElementById("target").value;
+              var output = "";
+              for (var i = 0; i < content.length; i++ )
+              { 
+                var letter = content.charAt(i);
+                if(letter == "\n"){
+                  output += "<br>";
+                } else if(letter == " "){
+                  output += letter;
+                } else if($.inArray(letter, vowels) > -1){
+                    var redFont = "<span class=\"red\">"+letter+"</span>";
+                    output += redFont;
+                  } else {
+                    var blueFont = "<span class=\"blue\">"+letter+"</span>";
+                    output += blueFont;
+                  }
+              }
+              document.getElementById("mydiv").innerHTML = output;
+            }
+
+            $('#size').change(function(){
+                var sizeSelected = $(this).val();
+                $('#mydiv p').css('font-size',sizeSelected );
+                $('#mydiv').css('font-size',sizeSelected );
+
+            });
+
+            function clearTextBox(){
+              document.getElementById("mydiv").innerHTML = "";
+              document.getElementById("target").value = "";
+
+            }
+        </script>
+
+    </body>
+</html>
